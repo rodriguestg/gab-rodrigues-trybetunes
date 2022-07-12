@@ -35,7 +35,7 @@ class Login extends React.Component {
 
   render() {
     const { login, nameCount } = this.state;
-    // const carregandoElement = (<span>Carregando...</span>);
+    // const carregandoElement = (<span> Carregando...</span>);
     // const logado = false;
     return login ? <Loading /> : (
       <div data-testid="page-login">
