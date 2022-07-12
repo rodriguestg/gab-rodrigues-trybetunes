@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Header from './Header';
 import Loading from './Loading';
-import { Link } from 'react-router-dom';
 
 class Search extends React.Component {
   state = {
@@ -20,10 +20,8 @@ class Search extends React.Component {
 
   searchClick = () => {
     const { contentInput } = this.state;
-    // console.log(await searchAlbumsAPI(contentInput));
     this.setState({ login: true });
     searchAlbumsAPI(contentInput).then((album) => {
-      // history.push(`/album/${contentInput}`);
       this.setState({
         login: false,
         albums: [...album],
@@ -37,15 +35,18 @@ class Search extends React.Component {
     const albumRender = (
       <section>
         <p>{ `Resultado de álbuns de: ${contentInput}` }</p>
-        { albums.map((album) => (
-          <div key={ album.artistId }>
+        { albums.map((album, index) => (
+          <div key={ index }>
             <img src={ album.artworkUrl100 } alt={ album.artistName } />
             <h1>{ album.artistName }</h1>
             <p>{ album.collectionName }</p>
             <Link
               data-testid={ `link-to-album-${album.collectionId}` }
               to={ `/album/${album.collectionId}` }
-            />
+              valueInput={ album.collectionId }
+            >
+              Sobre
+            </Link>
           </div>
         ))}
       </section>
