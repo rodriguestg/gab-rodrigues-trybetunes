@@ -18,7 +18,7 @@ class Login extends React.Component {
     this.setState({ nameCount: numberName.length, nameInput: numberName });
   }
 
-  handleClick = async () => {
+  handleClick = () => {
     const { nameInput } = this.state;
     const { history } = this.props;
     this.setState({ login: true });
@@ -29,7 +29,6 @@ class Login extends React.Component {
       description: '',
     };
     createUser(newUser).then(() => {
-      // this.setState({ login: false });
       history.push('/search');
     });
   }
