@@ -9,13 +9,29 @@ class MusicCard extends React.Component {
     check: false,
   }
 
+  componentDidMount() {
+    const { getFavoriteSongs, trackId } = this.props;
+    getFavoriteSongs().then((songs) => {
+      const songVar = songs.find((song) => song.trackId === trackId);
+      if (songVar) {
+        return this.setState({
+          check: true,
+        });
+      }
+      if (!songVar) {
+        return this.setState({
+          check: false,
+        });
+      }
+    });
+  }
+
   add = ({ target }) => {
-    console.log();
     this.setState({ login: true });
-    const { id } = this.props;
+    const { trackId } = this.props;
     // console.log(await getMusics(id));
     if (target.checked) {
-      addSong({ id }).then(() => {
+      addSong({ trackId }).then(() => {
         this.setState({
           login: false,
           check: true,
@@ -64,8 +80,9 @@ class MusicCard extends React.Component {
 MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackName: PropTypes.string.isRequired,
-  trackId: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  trackId: PropTypes.number.isRequired,
+  // id: PropTypes.number.isRequired,
+  getFavoriteSongs: PropTypes.func.isRequired,
 };
 
 export default MusicCard;

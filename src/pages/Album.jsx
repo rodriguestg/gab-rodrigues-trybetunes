@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import getMusics from '../services/musicsAPI';
 import Header from './Header';
 import Loading from './Loading';
@@ -19,7 +20,6 @@ class Album extends React.Component {
 
   searchClick = async () => {
     const { match: { params: { id } } } = this.props;
-    console.log(await getMusics(id));
     getMusics(id).then((album) => {
       const { artistName, collectionName } = album[0];
       this.setState({
@@ -48,6 +48,8 @@ class Album extends React.Component {
               previewUrl={ album.previewUrl }
               trackId={ album.trackId }
               id={ id }
+              album={ album }
+              getFavoriteSongs={ getFavoriteSongs }
             />
           ))
         }
@@ -59,7 +61,7 @@ class Album extends React.Component {
 Album.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
