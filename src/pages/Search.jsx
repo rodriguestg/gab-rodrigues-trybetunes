@@ -43,7 +43,6 @@ class Search extends React.Component {
             <Link
               data-testid={ `link-to-album-${album.collectionId}` }
               to={ `/album/${album.collectionId}` }
-              valueInput={ album.collectionId }
             >
               Sobre
             </Link>

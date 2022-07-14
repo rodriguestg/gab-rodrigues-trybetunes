@@ -14,23 +14,6 @@ class Favorites extends React.Component {
     this.favoritesFunc();
   }
 
-  favoritesCard = () => {
-    const { songs } = this.state;
-    // getFavoriteSongs().then((songFav) => {
-    // console.log(songFav);
-    // songs.map((album, index) => (
-    //   <MusicCard
-    //     key={ index }
-    //     trackName={ album.trackName }
-    //     previewUrl={ album.previewUrl }
-    //     trackId={ album.trackId }
-    //     album={ album }
-    //     getFavoriteSongs={ getFavoriteSongs }
-    //     favoritesCard={ this.favoritesFunc }
-    //   />));
-    // });
-  }
-
   favoritesFunc2 = () => {
     this.setState({ login: true });
     this.favoritesFunc();
