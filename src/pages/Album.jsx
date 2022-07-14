@@ -17,9 +17,9 @@ class Album extends React.Component {
     this.searchClick();
   }
 
-  searchClick = () => {
+  searchClick = async () => {
     const { match: { params: { id } } } = this.props;
-    // console.log(await getMusics(id));
+    console.log(await getMusics(id));
     getMusics(id).then((album) => {
       const { artistName, collectionName } = album[0];
       this.setState({
@@ -34,6 +34,7 @@ class Album extends React.Component {
   render() {
     // getMusics();
     const { albumsList, login, nameArt, nameAlb } = this.state;
+    const { match: { params: { id } } } = this.props;
     return login ? <Loading /> : (
       <div data-testid="page-album">
         <Header />
@@ -45,6 +46,8 @@ class Album extends React.Component {
               key={ index }
               trackName={ album.trackName }
               previewUrl={ album.previewUrl }
+              trackId={ album.trackId }
+              id={ id }
             />
           ))
         }
@@ -56,7 +59,7 @@ class Album extends React.Component {
 Album.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.number,
     }).isRequired,
   }).isRequired,
 };
