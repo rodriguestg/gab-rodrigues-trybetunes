@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from './Loading';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   state = {
@@ -39,9 +39,11 @@ class MusicCard extends React.Component {
       });
     }
     if (!target.checked) {
-      this.setState({
-        login: false,
-        check: false,
+      removeSong({ trackId }).then(() => {
+        this.setState({
+          login: false,
+          check: false,
+        });
       });
     }
   }
